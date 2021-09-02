@@ -1,3 +1,5 @@
+package main
+
 import (
 	"fmt"
 	"io/ioutil"
@@ -7,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/iam"
 	"github.com/aws/aws-sdk-go/service/s3"
 )
 
@@ -17,6 +20,8 @@ var (
 const (
 	BUCKET_NAME = "thee123"
 	REGION      = "us-east-2"
+	FIRST_NAME  = "jason"
+	LAST_NAME   = "anderson"
 )
 
 func init() {
@@ -25,6 +30,8 @@ func init() {
 	})))
 }
 
+// s3 Bucket commands
+// list buckets
 func listBuckets() (resp *s3.ListBucketsOutput) {
 	resp, err := s3session.ListBuckets(&s3.ListBucketsInput{})
 	if err != nil {
@@ -126,7 +133,15 @@ func deleteObject(filename string) (resp *s3.DeleteObjectOutput) {
 	return resp
 }
 
+// iam account mangment function calls
+func createUser() (resp *iam.CreateUserOutput) {
+
+	return resp
+}
+
 func main() {
+	createBucket()
+	listBuckets()
 	folder := "files"
 
 	files, _ := ioutil.ReadDir(folder)
